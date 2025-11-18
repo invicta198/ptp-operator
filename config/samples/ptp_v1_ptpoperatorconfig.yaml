@@ -1,9 +1,22 @@
 apiVersion: ptp.openshift.io/v1
-kind: PtpOperatorConfig
+kind: PtpConfig
 metadata:
-  name: default
+  name: ptp-master
+  namespace: node-feature-discovery
 spec:
-  daemonNodeSelector:
-    feature.node.kubernetes.io/ptp-capable: "yes"
-    node-role.kubernetes.io/worker: ""
-  ptpEventConfig: {}
+  nodeSelector:
+    matchLabels:
+      ptp-role: "master"
+
+  ptpSettings:
+    - name: master-profile
+      iface: ens2f1
+      ptp4lOpts:
+        - "-2"               # PTPv2
+        - "-s"               # Slave-only off → this becomes master
+        - "-m"               # Logging to stdout
+        - "-f /etc/ptp4l.conf"
+      phc2sysOpts:
+        - "-a"               # Automatic clock synchronization
+        - "-r"               # Step hardware clock
+        - "-n 24"            # Sync interval

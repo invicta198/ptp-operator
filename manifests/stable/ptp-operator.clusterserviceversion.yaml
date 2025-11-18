@@ -8,7 +8,7 @@ metadata:
           "apiVersion": "ptp.openshift.io/v1",
           "kind": "NodePtpDevice",
           "metadata": {
-            "name": "node.example.com"
+            "name": "voereir02"
           },
           "spec": {}
         },
@@ -21,7 +21,7 @@ metadata:
           "spec": {
             "profile": [
               {
-                "interface": "ens787f1",
+                "interface": "ens2f1",
                 "name": "profile1",
                 "phc2sysOpts": "-a -r",
                 "ptp4lOpts": "-s -2",
@@ -32,8 +32,8 @@ metadata:
               {
                 "match": [
                   {
-                    "nodeLabel": "node-role.kubernetes.io/worker=",
-                    "nodeName": "node.example.com"
+                    "nodeLabel": "kubernetes.io/hostname=",
+                    "nodeName": "voereir02"
                   }
                 ],
                 "priority": 4,
@@ -51,7 +51,7 @@ metadata:
           "spec": {
             "daemonNodeSelector": {
               "feature.node.kubernetes.io/ptp-capable": "yes",
-              "node-role.kubernetes.io/worker": ""
+              "kubernetes.io/hostname": "voereir02"
             },
             "ptpEventConfig": {}
           }
@@ -422,7 +422,7 @@ spec:
                   valueFrom:
                     fieldRef:
                       fieldPath: metadata.name
-                image: ghcr.io/k8snetworkplumbingwg/ptp-operator:4.21
+                image: ghcr.io/k8snetworkplumbingwg/ptp-operator:latest
                 imagePullPolicy: IfNotPresent
                 name: ptp-operator
                 ports:
@@ -438,7 +438,7 @@ spec:
                   name: cert
                   readOnly: true
               nodeSelector:
-                node-role.kubernetes.io/master: ""
+                kubernetes.io/hostname: voereir01
               priorityClassName: system-node-critical
               serviceAccountName: ptp-operator
               tolerations:

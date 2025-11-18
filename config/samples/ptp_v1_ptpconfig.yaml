@@ -5,7 +5,7 @@ metadata:
 spec:
   profile:
   - name: "profile1"
-    interface: "ens787f1"
+    interface: "ens2f1"
     ptp4lOpts: "-s -2"
     phc2sysOpts: "-a -r"
     ptpClockThreshold: {}
@@ -13,5 +13,5 @@ spec:
   - profile: "profile1"
     priority: 4
     match:
-    - nodeName: "node.example.com"
-      nodeLabel: "node-role.kubernetes.io/worker="
+    - nodeName: "voereir02"
+      nodeLabel: "kubernetes.io/hostname="

@@ -72,7 +72,7 @@ kubectl delete pods -l name=ptp-operator -n openshift-ptp
 kubectl rollout status deployment ptp-operator -n openshift-ptp
 
 # Patch ptpoperatorconfig to start events (in case it is not configured yet )
-./retry.sh 60 5 kubectl patch ptpoperatorconfig default -nopenshift-ptp --type=merge --patch '{"spec": {"ptpEventConfig": {"enableEventPublisher": true, "transportHost": "http://ptp-event-publisher-service-NODE_NAME.openshift-ptp.svc.cluster.local:9043", "storageType": "local-sc"}, "daemonNodeSelector": {"node-role.kubernetes.io/worker": ""}}}'
+./retry.sh 60 5 kubectl patch ptpoperatorconfig default -nopenshift-ptp --type=merge --patch '{"spec": {"ptpEventConfig": {"enableEventPublisher": true, "transportHost": "http://ptp-event-publisher-service-NODE_NAME.openshift-ptp.svc.cluster.local:9043", "storageType": "local-sc"}, "daemonNodeSelector": {"kubernetes.io/hostname": "voereir02"}}}'
 
 ./retry.sh 30 3 kubectl rollout status ds linuxptp-daemon -n openshift-ptp
 

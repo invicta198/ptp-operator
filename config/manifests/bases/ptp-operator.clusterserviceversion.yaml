@@ -14,7 +14,7 @@ metadata:
           "spec": {
             "profile": [{
                 "name": "ptpconfig-profile-1",
-                "interface": "eth0",
+                "interface": "ens2f1",
                 "ptp4lOpts": "-s -2",
                 "phc2sysOpts": "-a -r"
               }
@@ -23,8 +23,8 @@ metadata:
                 "profile": "ptpconfig-profile-1",
                 "priority": 50,
                 "match": [{
-                    "nodeLabel": "node-role.kubernetes.io/worker=",
-                    "nodeName": "kubernetes.io/hostname=node.example.com"
+                    "nodeLabel": "kubernetes.io/hostname=",
+                    "nodeName": "kubernetes.io/hostname=voereir02"
                   }
                 ]
               }
@@ -35,7 +35,7 @@ metadata:
           "apiVersion": "ptp.openshift.io/v1",
           "kind": "NodePtpDevice",
           "metadata": {
-            "name": "node.example.com",
+            "name": "voereir02",
             "namespace": "openshift-ptp"
           },
           "spec": {}

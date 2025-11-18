@@ -32,7 +32,7 @@ spec:
         role: ptp
     spec:
       nodeSelector:
-        node-role.kubernetes.io/master: ""
+        kubernetes.io/hostname: voereir01
       tolerations:
       - effect: NoSchedule
         key: node-role.kubernetes.io/master
